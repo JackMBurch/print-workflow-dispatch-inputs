@@ -28,7 +28,7 @@ runs:
       run: |
         output=$(
           echo "Checking for workflow_dispatch inputs:"
-          if [[ "${{ github.event_name }}" = "workflow_dispatch" || ${{ github.event_name }} = "workflow_call" ]]; then
+          if [[ "${{ github.event_name }}" = "workflow_dispatch" || "${{ github.event_name }}" = "push" ]]; then
             if [ -n "$GITHUB_EVENT_PATH" ] && [ -f "$GITHUB_EVENT_PATH" ]; then
               inputs=$(jq -r '.inputs // empty' "$GITHUB_EVENT_PATH")
               if [ -n "$inputs" ] && [ "$inputs" != "null" ]; then
